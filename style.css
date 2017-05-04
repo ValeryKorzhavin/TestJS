@@ -1,0 +1,31 @@
+#first-num, #second-num {
+  padding: 0px 10px 0px 10px;
+  border-radius: 10%;
+}
+div#task {
+  margin: 50px;
+  text-align: center;
+  font-family: serif;
+}
+div#example {
+  font-size: 36pt;
+  margin-bottom: 150px;
+}
+input#number2 {
+  display: none;
+}
+input#result {
+  font-size: 36pt;
+  display: none;
+}
+input {
+  border: 2px solid grey;
+  border-radius: 15%;
+  font-family: serif;
+  font-size: 18pt;
+  text-align: center;
+}
+canvas {
+  margin-bottom: -25px;
+  margin-left: -204px;
+}
