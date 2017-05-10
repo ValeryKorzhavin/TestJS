@@ -21,10 +21,10 @@ body {
 #number2 {
   display: none;
 }
-
 #result {
   font-size: 36pt;
   display: none;
+  width: 55px;
 }
 input {
   border: 2px solid grey;
@@ -37,7 +37,6 @@ canvas {
   position: absolute;
   top: 125px;
   left: 35px;
-
   z-index: 5000;
 }
 img {
@@ -60,4 +59,5 @@ img {
 #number1, #number2 {
   position: absolute;
   z-index: 9999;
+  width: 25px;
 }

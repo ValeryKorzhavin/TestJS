@@ -50,11 +50,11 @@ $(document).ready(function () {
     var secondCurveHeight = canvasHeight - (thirdPoint - secondPoint) / 3;
 
     var positionFirst = {
-      x: secondPoint / 2,
+      x: secondPoint / 2 + 25,
       y: 80 + secondPoint / 3,
     };
     var positionSecond = {
-      x: (thirdPoint - secondPoint) / 2 + secondPoint,
+      x: (thirdPoint - secondPoint) / 2 + secondPoint + 25,
       y: 80 + (thirdPoint - secondPoint) / 3,
     };
     function setPosition(object, position) {
