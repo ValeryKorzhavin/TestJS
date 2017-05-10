@@ -1,20 +1,28 @@
 #first-num, #second-num {
   padding: 0px 10px 0px 10px;
   border-radius: 10%;
+  background-color: white;
 }
-div#task {
-  margin: 50px;
+#first-num.wrong, #second-num.wrong {
+  background-color: orange;
+}
+body {
   text-align: center;
+}
+#task {
+  width: 900px;
   font-family: serif;
+  display: inline-block;
 }
-div#example {
+#example {
   font-size: 36pt;
-  margin-bottom: 150px;
+  height: 100px;
 }
-input#number2 {
+#number2 {
   display: none;
 }
-input#result {
+
+#result {
   font-size: 36pt;
   display: none;
 }
@@ -26,6 +34,30 @@ input {
   text-align: center;
 }
 canvas {
-  margin-bottom: -25px;
-  margin-left: -204px;
+  position: absolute;
+  top: 125px;
+  left: 35px;
+
+  z-index: 5000;
+}
+img {
+  position: absolute;
+  top: 200px;
+  left: 0px;
+  z-index: 6;
+}
+.result-numbers {
+  position: absolute;
+  font-size: 18pt;
+}
+.wrong-input {
+  color: red;
+}
+#interaction-layer {
+  height: 300px;
+  position: relative;
+}
+#number1, #number2 {
+  position: absolute;
+  z-index: 9999;
 }

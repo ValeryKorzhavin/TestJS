@@ -45,73 +45,64 @@ $(document).ready(function () {
     var canvas = document.getElementById("canvas");
     var canvasHeight = canvas.height;
 
+
     var firstCurveHeight = canvasHeight - (secondPoint - firstPoint) / 3;
     var secondCurveHeight = canvasHeight - (thirdPoint - secondPoint) / 3;
 
-    function setPosition(object, left, bottom) {
+    var positionFirst = {
+      x: secondPoint / 2,
+      y: 80 + secondPoint / 3,
+    };
+    var positionSecond = {
+      x: (thirdPoint - secondPoint) / 2 + secondPoint,
+      y: 80 + (thirdPoint - secondPoint) / 3,
+    };
+    function setPosition(object, position) {
       object.css({
-        'position':'relative',
-        'left' : left,
-        'bottom': bottom,
+        'left' : position.x,
+        'bottom': position.y,
       });
       return object;
     };
-    setPosition($('#number1'),
-      secondPoint / 2 - 393,
-      -firstCurveHeight - 5
-    );
-    setPosition($('#number2'),
-      (thirdPoint - secondPoint) / 2
-      + secondPoint - 411,
-      -secondCurveHeight - 5
-    );
+
+    setPosition($('#number1'), positionFirst);
+    setPosition($('#number2'), positionSecond);
 
     drawCurve(firstPoint, secondPoint, firstCurveHeight, canvas);
 
-    $('#number1').on('keyup', function() {
-      var enteredNumber = +$(this).val();
-      var requiredNumber = +$('#first-num').text();
-
-      if (enteredNumber === requiredNumber) {
-        $('#number2').fadeIn();
-        $(this).remove();
-        $('#input-layer').prepend(
-            setPosition($('<span>'+ enteredNumber +'</span>'),
-              secondPoint / 2 - 393, -firstCurveHeight - 5)
-              .css('font-size', '18pt')
-        );
-        drawCurve(secondPoint, thirdPoint, secondCurveHeight, canvas);
-        $('#first-num').css('background-color', 'white');
-      } else {
-        $(this).css('color', 'red');
-        $('#first-num').css({
-          'background-color': 'orange'
-        });
-      }
-    });
-
-    $('#number2').on('keyup', function() {
-        var enteredNumber = +$(this).val();
-        var requiredNumber = +$('#second-num').text();
+    function proccessInput(sourceNumber, inputNumber,
+                           nextInputNumber, position, result) {
+      return function () {
+        var enteredNumber = +$(inputNumber).val();
+        var requiredNumber = +$(sourceNumber).text();
 
         if (enteredNumber === requiredNumber) {
-          $('#result').fadeIn();
-          $(this).remove();
-          $('#input-layer').append(
-            setPosition($('<span>'+ enteredNumber +'</span>'),
-              (thirdPoint - secondPoint) / 2 + secondPoint - 411,
-              -secondCurveHeight - 5)
-              .css('font-size', '18pt')
+          $(nextInputNumber).fadeIn();
+          $(inputNumber).after(
+            setPosition(
+              $('<span>'+ enteredNumber +'</span>')
+              .attr({'class': 'result-numbers'}),
+              position
+            )
           );
-          $('#second-num').css('background-color', 'white');
-          $('#result-num').remove();
+          $(inputNumber).remove();
+          drawCurve(secondPoint, thirdPoint, secondCurveHeight, canvas);
+          $(sourceNumber).removeClass('wrong');
         } else {
-          $(this).css('color', 'red');
-          $('#second-num').css({
-            'background-color': 'orange'
-          });
+          $(inputNumber).addClass('wrong-input');
+          $(sourceNumber).addClass('wrong');
         }
-    });
+        if (result) {
+          $('#result-num').remove();
+        }
+      }
+    }
+
+    $('#number1').on('keyup',
+    proccessInput('#first-num', '#number1', '#number2', positionFirst));
+
+    $('#number2').on('keyup',
+    proccessInput('#second-num', '#number2', '#result', positionSecond, true));
 
     $('#result').on('keyup', function() {
         if ($(this).val().length === resultNum.toString().length) {
@@ -119,7 +110,7 @@ $(document).ready(function () {
             $(this).remove();
             $("#example").append($('<span>' + $(this).val() + '</span>'));
           } else {
-            $(this).css('color', 'red');
+            $(this).addClass('wrong-input');
           }
         }
     });
