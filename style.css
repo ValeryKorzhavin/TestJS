@@ -11,7 +11,7 @@ body {
 }
 #task {
   width: 900px;
-  font-family: serif;
+  font-family: 'PT Sans', sans-serif;
   display: inline-block;
 }
 #example {
@@ -29,7 +29,7 @@ body {
 input {
   border: 2px solid grey;
   border-radius: 15%;
-  font-family: serif;
+  font-family: 'PT Sans', sans-serif;
   font-size: 18pt;
   text-align: center;
 }

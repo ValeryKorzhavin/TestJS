@@ -15,19 +15,19 @@ function setExampleNumbers(firstNum, secondNum) {
 }
 
 function drawCurve (firstRefPoint, secondRefPoint, curveHeight, canvas) {
-    var context = canvas.getContext("2d");
-    var canvasHeight = canvas.height;
-    context.lineWidth = 2;
-    context.strokeStyle = '#b95483'
-    context.moveTo(firstRefPoint, canvasHeight);
-    var smoothness = (secondRefPoint - firstRefPoint) / 8;
-    context.bezierCurveTo(firstRefPoint + smoothness,
-                          curveHeight,
-                          secondRefPoint - smoothness,
-                          curveHeight,
-                          secondRefPoint,
-                          canvasHeight);
-    context.stroke();
+  var context = canvas.getContext("2d");
+  var canvasHeight = canvas.height;
+  context.lineWidth = 2;
+  context.strokeStyle = '#b95483'
+  context.moveTo(firstRefPoint, canvasHeight);
+  var smoothness = (secondRefPoint - firstRefPoint) / 8;
+  context.bezierCurveTo(firstRefPoint + smoothness,
+                        curveHeight,
+                        secondRefPoint - smoothness,
+                        curveHeight,
+                        secondRefPoint,
+                        canvasHeight);
+  context.stroke();
 }
 
 $(document).ready(function () {
@@ -88,13 +88,14 @@ $(document).ready(function () {
           $(inputNumber).remove();
           drawCurve(secondPoint, thirdPoint, secondCurveHeight, canvas);
           $(sourceNumber).removeClass('wrong');
+          if (result) {
+            $('#result-num').remove();
+          }
         } else {
           $(inputNumber).addClass('wrong-input');
           $(sourceNumber).addClass('wrong');
         }
-        if (result) {
-          $('#result-num').remove();
-        }
+        
       }
     }
 
